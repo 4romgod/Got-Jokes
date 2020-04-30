@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/jokes"
+            android:title="Jokes"
+            android:icon="@drawable/ic_launcher_foreground"
+            app:showAsAction="always"/>
+
+        <item android:id="@+id/post"
+            android:title="Post"
+            android:icon="@drawable/ic_launcher_foreground"
+            app:showAsAction="always"/>
+
+        <item android:id="@+id/saved"
+            android:title="Saved"
+            android:icon="@drawable/ic_launcher_foreground"
+            app:showAsAction="always"/>
+
+
+    </group>
+</menu>
