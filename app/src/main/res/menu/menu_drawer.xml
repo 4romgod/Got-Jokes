@@ -2,13 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <group android:checkableBehavior="none">
-
+    <group>
         <item android:title="Jokes"
             android:id="@+id/jokes"
             android:icon="@drawable/ic_launcher_foreground"
             app:showAsAction="never"/>
-
     </group>
 
     <item android:title="Category">

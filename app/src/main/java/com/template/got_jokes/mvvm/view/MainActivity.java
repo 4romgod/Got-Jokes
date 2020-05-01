@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.template.got_jokes.mvvm.view.fragment.FragJoke;
+import com.template.got_jokes.mvvm.view.fragment.FragJokes;
 import com.template.got_jokes.mvvm.view.fragment.FragProfile;
 import com.template.got_jokes.mvvm.view.fragment.FragSaved;
 import com.template.got_jokes.R;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViews();
-        UI.replaceFragment(fragmentManager, new FragJoke(), R.id.layout_frame_main);
+        UI.replaceFragment(fragmentManager, new FragJokes(), R.id.layout_frame_main);
 
         enableNavBottom();
     }       //end onCreate()
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.jokes:{
                         Toast.makeText(MainActivity.this, "Jokes", Toast.LENGTH_SHORT).show();
-                        UI.replaceFragment(fragmentManager, new FragJoke(), R.id.layout_frame_main);
+                        UI.replaceFragment(fragmentManager, new FragJokes(), R.id.layout_frame_main);
                         break;
                     }
                     case R.id.saved:{

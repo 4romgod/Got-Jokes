@@ -13,8 +13,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/view_nav_bottom"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/view_nav_bottom"

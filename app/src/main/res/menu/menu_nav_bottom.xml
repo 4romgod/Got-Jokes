@@ -5,7 +5,7 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/jokes"
             android:title="Jokes"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@mipmap/ic_laugh"
             app:showAsAction="always"/>
 
         <item android:id="@+id/post"

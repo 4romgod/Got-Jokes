@@ -3,4 +3,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--navigation drawer states-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <!--    categories of jokes-->
+    <string name="programing">Programming</string>
+    <string name="dark">Dark</string>
+    <string name="miscellaneous">Miscellaneous</string>
 </resources>
