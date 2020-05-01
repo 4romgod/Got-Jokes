@@ -4,15 +4,14 @@ public class Joke {
 
     private int id;
     private String category;
-    private String joke;
+    private String type;
 
 
-    public Joke(int id, String category, String joke) {
+    public Joke(int id, String category, String type) {
         this.id = id;
         this.category = category;
-        this.joke = joke;
+        this.type = type;
     }
-
 
     public int getId() {
         return id;
@@ -30,18 +29,20 @@ public class Joke {
         this.category = category;
     }
 
-    public String getJoke() {
-        return joke;
+    public String getType() {
+        return type;
     }
 
-    public void setJoke(String joke) {
-        this.joke = joke;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
-        String message = String.format("ID: %d\nCategory: %s\nJoke: %s\n", id, category, joke);
-        return message;
+        return "Joke{" +
+                "id=" + id +
+                ", category='" + category + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
-
 }

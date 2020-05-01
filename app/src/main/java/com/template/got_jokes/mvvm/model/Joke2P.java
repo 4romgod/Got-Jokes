@@ -1,36 +1,18 @@
 package com.template.got_jokes.mvvm.model;
 
-public class Joke2P{
+public class Joke2P extends Joke{
 
-    private int id;
-    private String category;
     private String setup;
     private String delivery;
 
 
-    public Joke2P(int id, String category, String setup, String delivery) {
-        this.id = id;
-        this.category = category;
+    public Joke2P(int id, String category, String type, String setup, String delivery) {
+        super(id, category, type);
+
         this.setup = setup;
         this.delivery = delivery;
     }
 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     public String getSetup() {
         return setup;
@@ -48,4 +30,12 @@ public class Joke2P{
         this.delivery = delivery;
     }
 
+
+    @Override
+    public String toString() {
+        return "Joke2P{" +
+                "setup='" + setup + '\'' +
+                ", delivery='" + delivery + '\'' +
+                '}';
+    }
 }
