@@ -17,7 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.template.got_jokes.Network.IGetDataService;
 import com.template.got_jokes.Network.RetrofitClientInstance;
 import com.template.got_jokes.R;
-import com.template.got_jokes.Util;
+import com.template.got_jokes.utils.Util;
 import com.template.got_jokes.mvvm.model.Joke;
 import com.template.got_jokes.mvvm.model.Joke1P;
 import com.template.got_jokes.mvvm.model.Joke2P;
@@ -37,7 +37,7 @@ public class FragLaugh extends Fragment {
     View layoutMain;
     ProgressDialog progressDialog;
     TextView tvCategory, tvJoke, tvJoke2;
-    FloatingActionButton fabNext, fabPrev;
+    FloatingActionButton fabNext, fabPrev, fabSave;
 
     IGetDataService service;
 
@@ -76,6 +76,7 @@ public class FragLaugh extends Fragment {
 
         nextBtn();
         prevBtn();
+        saveBtn();
 
     }       //end onStart()
 
@@ -86,8 +87,8 @@ public class FragLaugh extends Fragment {
         tvJoke2 = layoutMain.findViewById(R.id.text_joke2);
 
         fabNext = layoutMain.findViewById(R.id.fab_next);
-
         fabPrev = layoutMain.findViewById(R.id.fab_prev);
+        fabSave = layoutMain.findViewById(R.id.fab_save);
 
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading....");
@@ -139,6 +140,15 @@ public class FragLaugh extends Fragment {
 
                 Log.d(TAG, "onClick next: size: " + listJokes.size());
                 Log.d(TAG, "onClick next: index: " + index);
+            }
+        });
+    }
+
+    public void saveBtn(){
+        fabSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Saving the Joke", Toast.LENGTH_SHORT).show();
             }
         });
     }

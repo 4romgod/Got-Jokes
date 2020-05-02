@@ -13,7 +13,7 @@ import com.template.got_jokes.mvvm.view.fragment.FragHome;
 import com.template.got_jokes.mvvm.view.fragment.FragProfile;
 import com.template.got_jokes.mvvm.view.fragment.FragSaved;
 import com.template.got_jokes.R;
-import com.template.got_jokes.UI;
+import com.template.got_jokes.utils.UI;
 
 public class MainActivity extends AppCompatActivity {
 

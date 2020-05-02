@@ -1,4 +1,4 @@
-package com.template.got_jokes;
+package com.template.got_jokes.utils;
 
 import android.content.Context;
 import android.view.View;

@@ -41,8 +41,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"/>
 
-
     </RelativeLayout>
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/view_nav_drawer"

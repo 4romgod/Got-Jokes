@@ -24,7 +24,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.template.got_jokes.R;
-import com.template.got_jokes.UI;
+import com.template.got_jokes.utils.UI;
 
 public class FragHome extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "FragJokes";
@@ -167,8 +167,6 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
                 return false;
             }
         }));
-
-
 
         super.onCreateOptionsMenu(menu, inflater);
     }

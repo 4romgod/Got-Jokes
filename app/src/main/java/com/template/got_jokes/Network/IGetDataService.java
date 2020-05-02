@@ -23,16 +23,4 @@ public interface IGetDataService {
             @Query("contains") String contain
     );
 
-    /*@GET("{category}?type=twopart")
-    Call<Joke2P> getJoke2P(@Path("category") String category);*/
-
-    /*@GET("{category}")
-    Call<Joke> getJoke(@Path("category") String cat);*/
-
-   /* @GET("{category}")
-    Call<Joke> getJoke(@Path("category") String cat, @Query("type") String type);*/
-
-/*    @GET("any")
-    Call<Joke> getJoke(@Query("contains") String contains);*/
-
 }       //end interface
