@@ -19,8 +19,6 @@ import com.template.got_jokes.Network.RetrofitClientInstance;
 import com.template.got_jokes.R;
 import com.template.got_jokes.utils.Util;
 import com.template.got_jokes.mvvm.model.Joke;
-import com.template.got_jokes.mvvm.model.Joke1P;
-import com.template.got_jokes.mvvm.model.Joke2P;
 
 
 import java.util.LinkedList;
@@ -39,14 +37,16 @@ public class FragLaugh extends Fragment {
     TextView tvCategory, tvJoke, tvJoke2;
     FloatingActionButton fabNext, fabPrev, fabSave;
 
-    IGetDataService service;
-
+    // PATH AND QUERY STRINGS
     String jokeCat = "";
     String jokeContains = "";
 
+    IGetDataService service;
 
+    // TEMPORARILY HOLDS JOKES TO ENABLE NEXT,PREV BUTTONS
     LinkedList listJokes = new LinkedList();
     int index = 0;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,12 +72,11 @@ public class FragLaugh extends Fragment {
     public void onStart() {
         super.onStart();
 
-        getRandJoke();
+        getJoke();
 
         nextBtn();
         prevBtn();
         saveBtn();
-
     }       //end onStart()
 
 
@@ -105,12 +104,7 @@ public class FragLaugh extends Fragment {
                 } else {
                     index = index - 1;
                     Joke joke = (Joke) listJokes.get(index);
-                    if(joke.getType().equalsIgnoreCase(getString(R.string.single))){
-                        display1P((Joke1P) listJokes.get(index));
-                    }
-                    else{
-                        display2P((Joke2P) listJokes.get(index));
-                    }
+                    display(joke);
                 }
 
                 Log.d(TAG, "onClick prev: size: " + listJokes.size());
@@ -125,17 +119,12 @@ public class FragLaugh extends Fragment {
             public void onClick(View v) {
                 if (index >= listJokes.size() - 1) {
                     index = listJokes.size() - 1;
-                    getRandJoke();
+                    getJoke();
                 }
                 else {
                     index++;
                     Joke joke = (Joke) listJokes.get(index);
-                    if(joke.getType().equalsIgnoreCase(getString(R.string.single))){
-                        display1P((Joke1P) listJokes.get(index));
-                    }
-                    else{
-                        display2P((Joke2P) listJokes.get(index));
-                    }
+                    display(joke);
                 }
 
                 Log.d(TAG, "onClick next: size: " + listJokes.size());
@@ -153,77 +142,42 @@ public class FragLaugh extends Fragment {
         });
     }
 
-
-    public void getJoke2P() {
-        Call<Joke2P> call = service.getJoke2P(jokeCat, jokeContains);
-        call.enqueue(new Callback<Joke2P>() {
-            @Override
-            public void onResponse(Call<Joke2P> call, Response<Joke2P> response) {
-                progressDialog.dismiss();
-
-                Joke2P joke = (Joke2P) response.body();
-                Log.d(TAG, "onResponse: Joke: " + joke.toString());
-                display2P(joke);
-
-                listJokes.addLast(joke);
-                index = listJokes.size() - 1;
-            }
-
-            @Override
-            public void onFailure(Call<Joke2P> call, Throwable t) {
-                progressDialog.dismiss();
-                Toast.makeText(getContext(), "Something got fucked up", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }           //end getJoke1P()
-
-    public void getJoke1P() {
-        Call<Joke1P> call = service.getJoke1P(jokeCat, jokeContains);
-        call.enqueue(new Callback<Joke1P>() {
-            @Override
-            public void onResponse(Call<Joke1P> call, Response<Joke1P> response) {
-                progressDialog.dismiss();
-
-                Joke1P joke = (Joke1P) response.body();
-                Log.d(TAG, "onResponse: Joke: " + joke.toString());
-                display1P(joke);
-
-                listJokes.addLast(joke);
-                index = listJokes.size() - 1;
-            }
-
-            @Override
-            public void onFailure(Call<Joke1P> call, Throwable t) {
-                progressDialog.dismiss();
-                Toast.makeText(getContext(), "Something got fucked up", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }           //end getJoke1P()
-
-    public void getRandJoke(){
+    public void getJoke() {
+        Call<Joke> call = service.getJoke(jokeCat, jokeContains);
         progressDialog.show();
 
-        if(Util.getRandType(getContext()).equals(getString(R.string.twopart))){
-            getJoke2P();
-        }
-        else if (Util.getRandType(getContext()).equals(getString(R.string.single))){
-            getJoke1P();
-        }
-    }           //end getRandJoke()
+        call.enqueue(new Callback<Joke>() {
+            @Override
+            public void onResponse(Call<Joke> call, Response<Joke> response) {
+                progressDialog.dismiss();
 
+                Joke joke = response.body();
+                Log.d(TAG, "onResponse: Joke: " + joke.toString());
+                display(joke);
 
-    public void display2P(Joke2P joke2P) {
-        tvCategory.setText(joke2P.getCategory());
-        tvJoke.setText(joke2P.getSetup());
-        tvJoke2.setText(joke2P.getDelivery());
+                listJokes.addLast(joke);
+                index = listJokes.size() - 1;
+            }
 
-        Log.d(TAG, "display: joke: " + joke2P.toString());
-    }       //end display2P()*/
-    public void display1P(Joke1P joke) {
+            @Override
+            public void onFailure(Call<Joke> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(getContext(), "Something got fucked up", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }           //end getJoke()
+
+    public void display(Joke joke) {
         tvCategory.setText(joke.getCategory());
-        tvJoke.setText(joke.getJoke());
 
-        Log.d(TAG, "display: joke: " + joke.toString());
+        if(joke.getType().equalsIgnoreCase(getString(R.string.single))){
+            tvJoke.setText(joke.getJoke());
+        }
+        else if(joke.getType().equalsIgnoreCase(getString(R.string.twopart))) {
+            tvJoke.setText(joke.getSetup());
+            tvJoke2.setText(joke.getDelivery());
+        }
+
     }       //end display2P()*/
 
 
