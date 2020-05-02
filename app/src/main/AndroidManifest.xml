@@ -11,13 +11,21 @@
         android:roundIcon="@mipmap/ic_laugh"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mvvm.view.MainActivity">
+
+        <activity
+            android:name=".mvvm.view.activity.MainActivity"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".mvvm.view.activity.SplashActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

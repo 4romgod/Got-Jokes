@@ -24,7 +24,6 @@ import com.template.got_jokes.mvvm.model.Joke2P;
 
 
 import java.util.LinkedList;
-import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;

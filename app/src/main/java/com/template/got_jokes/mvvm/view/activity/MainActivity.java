@@ -1,4 +1,4 @@
-package com.template.got_jokes.mvvm.view;
+package com.template.got_jokes.mvvm.view.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
