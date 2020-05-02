@@ -3,10 +3,13 @@ package com.template.got_jokes.mvvm.view.fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,12 +43,14 @@ public class FragJokes extends Fragment implements NavigationView.OnNavigationIt
     FragmentManager fragmentManager;
 
     String catJoke = "";
+    String contains = "";
 
 
-    public Fragment newFragment(String cat){
+    public Fragment newFragment(String cat, String contains){
         Fragment fragment = new FragLaugh();
         Bundle args = new Bundle();
         args.putString("JOKE_CAT", cat);
+        args.putString("JOKE_CONTAINS", contains);
         fragment.setArguments(args);
 
         return fragment;
@@ -54,6 +59,7 @@ public class FragJokes extends Fragment implements NavigationView.OnNavigationIt
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);        // enables toggle btn, and options menu
     }       //end onCreate()
 
     @Nullable
@@ -68,7 +74,7 @@ public class FragJokes extends Fragment implements NavigationView.OnNavigationIt
         fragmentManager = getActivity().getSupportFragmentManager();
 
         catJoke = getString(R.string.any);
-        UI.replaceFragment(fragmentManager, newFragment(catJoke), R.id.layout_frame_jokes);
+        UI.replaceFragment(fragmentManager, newFragment(catJoke, contains), R.id.layout_frame_jokes);
 
         return layoutMain;
     }       //end onCreateView()
@@ -90,16 +96,14 @@ public class FragJokes extends Fragment implements NavigationView.OnNavigationIt
     public void setupToolbar(){
         Log.d(TAG, "setupToolbar(): get toolbar view, create DrawerToggle, drawer listener, navViewLister");
 
-        actionBar.setTitle("Got Jokes");
+        actionBar.setTitle("");
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();        //synchronize the indicator with state of linked DrawerLayout
 
-
         navView.setNavigationItemSelectedListener(this);
-
     }       //end setupToolbar()
 
 
@@ -138,9 +142,38 @@ public class FragJokes extends Fragment implements NavigationView.OnNavigationIt
                 break;
         }       //end switch{}
 
-        UI.replaceFragment(fragmentManager, newFragment(catJoke), R.id.layout_frame_jokes);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        UI.replaceFragment(fragmentManager, newFragment(catJoke, contains), R.id.layout_frame_jokes);
 
         return true;
     }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_search, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.search);
+        
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener((new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                contains = query;
+                UI.replaceFragment(fragmentManager, newFragment(catJoke, contains), R.id.layout_frame_jokes);
+                Toast.makeText(getContext(), "Searching", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        }));
+
+
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
 
 }       //end class

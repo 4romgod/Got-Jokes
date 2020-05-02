@@ -5,7 +5,6 @@
     <group>
         <item android:title="Jokes"
             android:id="@+id/jokes"
-            android:icon="@drawable/ic_launcher_foreground"
             app:showAsAction="never"/>
     </group>
 
@@ -14,17 +13,14 @@
         <menu>
             <item android:title="Programming"
                 android:id="@+id/programming"
-                android:icon="@drawable/ic_launcher_foreground"
                 app:showAsAction="never"/>
 
             <item android:title="Miscellaneous"
                 android:id="@+id/miscellaneous"
-                android:icon="@drawable/ic_launcher_foreground"
                 app:showAsAction="never"/>
 
             <item android:title="Dark"
                 android:id="@+id/dark"
-                android:icon="@drawable/ic_launcher_foreground"
                 app:showAsAction="never"/>
         </menu>
 

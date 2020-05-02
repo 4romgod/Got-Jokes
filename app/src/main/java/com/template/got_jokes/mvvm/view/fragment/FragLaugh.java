@@ -42,6 +42,8 @@ public class FragLaugh extends Fragment {
     IGetDataService service;
 
     String jokeCat = "";
+    String jokeContains = "";
+
 
     LinkedList listJokes = new LinkedList();
     int index = 0;
@@ -61,6 +63,7 @@ public class FragLaugh extends Fragment {
         service = RetrofitClientInstance.getRetrofitInstance().create(IGetDataService.class);
 
         jokeCat = getArguments().getString("JOKE_CAT");
+        jokeContains = getArguments().getString("JOKE_CONTAINS");
 
         return layoutMain;
     }       //end onCreateView()
@@ -115,7 +118,6 @@ public class FragLaugh extends Fragment {
         });
     }
 
-
     public void nextBtn() {
         fabNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +145,7 @@ public class FragLaugh extends Fragment {
 
 
     public void getJoke2P() {
-        Call<Joke2P> call = service.getJoke2P(jokeCat);
+        Call<Joke2P> call = service.getJoke2P(jokeCat, jokeContains);
         call.enqueue(new Callback<Joke2P>() {
             @Override
             public void onResponse(Call<Joke2P> call, Response<Joke2P> response) {
@@ -166,7 +168,7 @@ public class FragLaugh extends Fragment {
     }           //end getJoke1P()
 
     public void getJoke1P() {
-        Call<Joke1P> call = service.getJoke1P(jokeCat);
+        Call<Joke1P> call = service.getJoke1P(jokeCat, jokeContains);
         call.enqueue(new Callback<Joke1P>() {
             @Override
             public void onResponse(Call<Joke1P> call, Response<Joke1P> response) {
