@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/jokes"
-            android:title="Jokes"
-            android:icon="@mipmap/ic_laugh"
+        <item android:id="@+id/home"
+            android:title="Home"
+            android:icon="@drawable/ic_home_white_24dp"
             app:showAsAction="always"/>
 
         <item android:id="@+id/post"
             android:title="Post"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/ic_add_white_24dp"
             app:showAsAction="always"/>
 
         <item android:id="@+id/saved"
             android:title="Saved"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/ic_save_save_24dp"
             app:showAsAction="always"/>
 
 

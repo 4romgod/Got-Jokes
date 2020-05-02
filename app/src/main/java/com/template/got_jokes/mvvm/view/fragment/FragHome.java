@@ -8,7 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -23,12 +22,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.template.got_jokes.R;
 import com.template.got_jokes.UI;
 
-public class FragJokes extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
+public class FragHome extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "FragJokes";
 
     //VIEWS
@@ -66,7 +64,7 @@ public class FragJokes extends Fragment implements NavigationView.OnNavigationIt
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(layoutMain == null){
-            layoutMain = inflater.inflate(R.layout.frag_jokes, null);
+            layoutMain = inflater.inflate(R.layout.frag_home, null);
         }
         initViews();
         setupToolbar();
@@ -121,7 +119,7 @@ public class FragJokes extends Fragment implements NavigationView.OnNavigationIt
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
 
-            case R.id.jokes:
+            case R.id.home:
                 catJoke = getString(R.string.any);
                 Toast.makeText(getContext(), catJoke, Toast.LENGTH_SHORT).show();
                 break;

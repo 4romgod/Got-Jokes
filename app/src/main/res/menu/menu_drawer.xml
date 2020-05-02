@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group>
-        <item android:title="Jokes"
-            android:id="@+id/jokes"
+        <item android:title="Shuffle"
+            android:id="@+id/home"
+            android:icon="@drawable/ic_shuffle_grey_24dp"
             app:showAsAction="never"/>
     </group>
 
@@ -13,14 +14,17 @@
         <menu>
             <item android:title="Programming"
                 android:id="@+id/programming"
+                android:icon="@drawable/ic_code_grey_24dp"
                 app:showAsAction="never"/>
 
             <item android:title="Miscellaneous"
                 android:id="@+id/miscellaneous"
+                android:icon="@drawable/ic_miscellaneous_grey_24dp"
                 app:showAsAction="never"/>
 
             <item android:title="Dark"
                 android:id="@+id/dark"
+                android:icon="@drawable/ic_dark_grey_24dp"
                 app:showAsAction="never"/>
         </menu>
 
