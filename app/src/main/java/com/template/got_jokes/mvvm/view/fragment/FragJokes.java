@@ -66,7 +66,9 @@ public class FragJokes extends Fragment implements NavigationView.OnNavigationIt
         setupToolbar();
 
         fragmentManager = getActivity().getSupportFragmentManager();
-        UI.replaceFragment(fragmentManager, newFragment("any"), R.id.layout_frame_jokes);
+
+        catJoke = getString(R.string.any);
+        UI.replaceFragment(fragmentManager, newFragment(catJoke), R.id.layout_frame_jokes);
 
         return layoutMain;
     }       //end onCreateView()
@@ -88,12 +90,13 @@ public class FragJokes extends Fragment implements NavigationView.OnNavigationIt
     public void setupToolbar(){
         Log.d(TAG, "setupToolbar(): get toolbar view, create DrawerToggle, drawer listener, navViewLister");
 
-        actionBar.setTitle("catJoke");
+        actionBar.setTitle("Got Jokes");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
 
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();        //synchronize the indicator with state of linked DrawerLayout
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
+
 
         navView.setNavigationItemSelectedListener(this);
 
@@ -115,7 +118,7 @@ public class FragJokes extends Fragment implements NavigationView.OnNavigationIt
         switch (menuItem.getItemId()){
 
             case R.id.jokes:
-                catJoke = "any";
+                catJoke = getString(R.string.any);
                 Toast.makeText(getContext(), catJoke, Toast.LENGTH_SHORT).show();
                 break;
 

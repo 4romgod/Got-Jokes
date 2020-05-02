@@ -13,6 +13,7 @@
     <string name="twopart">twopart</string>
 
     <!--    categories of jokes-->
+    <string name="any">Any</string>
     <string name="programing">Programming</string>
     <string name="dark">Dark</string>
     <string name="miscellaneous">Miscellaneous</string>
