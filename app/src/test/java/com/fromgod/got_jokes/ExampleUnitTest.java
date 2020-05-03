@@ -1,4 +1,4 @@
-package com.template.got_jokes;
+package com.fromgod.got_jokes;
 
 import org.junit.Test;
 

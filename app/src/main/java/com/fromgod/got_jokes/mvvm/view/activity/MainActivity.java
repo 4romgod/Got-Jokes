@@ -1,4 +1,4 @@
-package com.template.got_jokes.mvvm.view.activity;
+package com.fromgod.got_jokes.mvvm.view.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,11 +9,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.template.got_jokes.mvvm.view.fragment.FragHome;
-import com.template.got_jokes.mvvm.view.fragment.FragProfile;
-import com.template.got_jokes.mvvm.view.fragment.FragSaved;
-import com.template.got_jokes.R;
-import com.template.got_jokes.utils.UI;
+import com.fromgod.got_jokes.mvvm.view.fragment.FragHome;
+import com.fromgod.got_jokes.mvvm.view.fragment.FragProfile;
+import com.fromgod.got_jokes.mvvm.view.fragment.FragSaved;
+import com.fromgod.got_jokes.R;
+import com.fromgod.got_jokes.utils.UI;
 
 public class MainActivity extends AppCompatActivity {
 

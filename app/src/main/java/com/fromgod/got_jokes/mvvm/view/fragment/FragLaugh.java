@@ -1,4 +1,4 @@
-package com.template.got_jokes.mvvm.view.fragment;
+package com.fromgod.got_jokes.mvvm.view.fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -14,11 +14,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.template.got_jokes.Network.IGetDataService;
-import com.template.got_jokes.Network.RetrofitClientInstance;
-import com.template.got_jokes.R;
-import com.template.got_jokes.utils.Util;
-import com.template.got_jokes.mvvm.model.Joke;
+import com.fromgod.got_jokes.Network.IGetDataService;
+import com.fromgod.got_jokes.Network.RetrofitClientInstance;
+import com.fromgod.got_jokes.R;
+import com.fromgod.got_jokes.mvvm.model.Joke;
 
 
 import java.util.LinkedList;
@@ -137,7 +136,7 @@ public class FragLaugh extends Fragment {
         fabSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Saving the Joke", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Coming Soon...", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -153,16 +152,22 @@ public class FragLaugh extends Fragment {
 
                 Joke joke = response.body();
                 Log.d(TAG, "onResponse: Joke: " + joke.toString());
-                display(joke);
 
-                listJokes.addLast(joke);
-                index = listJokes.size() - 1;
+                if(joke != null){
+                    display(joke);
+                    listJokes.addLast(joke);
+                    index = listJokes.size() - 1;
+                }
+
             }
 
             @Override
             public void onFailure(Call<Joke> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(getContext(), "Something got fucked up", Toast.LENGTH_SHORT).show();
+                tvCategory.setText("Sorry! \nSomething went wrong... \n\nHaha Just joking... \n\nPress next to refresh");
+                tvJoke.setText("");
+                tvJoke2.setText("");
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
     }           //end getJoke()
@@ -172,6 +177,7 @@ public class FragLaugh extends Fragment {
 
         if(joke.getType().equalsIgnoreCase(getString(R.string.single))){
             tvJoke.setText(joke.getJoke());
+            tvJoke2.setText("");
         }
         else if(joke.getType().equalsIgnoreCase(getString(R.string.twopart))) {
             tvJoke.setText(joke.getSetup());

@@ -1,8 +1,8 @@
-package com.template.got_jokes.utils;
+package com.fromgod.got_jokes.utils;
 
 import android.content.Context;
 
-import com.template.got_jokes.R;
+import com.fromgod.got_jokes.R;
 
 import java.util.Random;
 

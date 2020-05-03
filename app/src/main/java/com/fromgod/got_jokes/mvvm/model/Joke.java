@@ -1,4 +1,4 @@
-package com.template.got_jokes.mvvm.model;
+package com.fromgod.got_jokes.mvvm.model;
 
 public class Joke {
 

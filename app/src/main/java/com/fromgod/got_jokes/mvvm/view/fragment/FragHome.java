@@ -1,4 +1,4 @@
-package com.template.got_jokes.mvvm.view.fragment;
+package com.fromgod.got_jokes.mvvm.view.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -23,8 +23,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
-import com.template.got_jokes.R;
-import com.template.got_jokes.utils.UI;
+import com.fromgod.got_jokes.R;
+import com.fromgod.got_jokes.utils.UI;
 
 public class FragHome extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "FragJokes";

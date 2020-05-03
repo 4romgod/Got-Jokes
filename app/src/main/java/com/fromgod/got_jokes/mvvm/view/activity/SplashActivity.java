@@ -1,4 +1,4 @@
-package com.template.got_jokes.mvvm.view.activity;
+package com.fromgod.got_jokes.mvvm.view.activity;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.template.got_jokes.R;
+import com.fromgod.got_jokes.R;
 
 /**
  * The first activity the app opens. Introduction to the app

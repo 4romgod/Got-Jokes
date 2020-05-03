@@ -1,4 +1,4 @@
-package com.template.got_jokes.mvvm.view.fragment;
+package com.fromgod.got_jokes.mvvm.view.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.template.got_jokes.R;
+import com.fromgod.got_jokes.R;
 
 
 public class FragSaved extends Fragment {

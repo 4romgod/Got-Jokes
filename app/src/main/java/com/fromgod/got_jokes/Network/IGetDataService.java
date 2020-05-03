@@ -1,6 +1,6 @@
-package com.template.got_jokes.Network;
+package com.fromgod.got_jokes.Network;
 
-import com.template.got_jokes.mvvm.model.Joke;
+import com.fromgod.got_jokes.mvvm.model.Joke;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
