@@ -74,4 +74,12 @@ public class MainActivity extends AppCompatActivity {
 
     }       //end enableNavBottom()
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        //viewBottomNav.setSelectedItemId(viewBottomNav.getSelectedItemId());
+
+    }
+
 }       //end class

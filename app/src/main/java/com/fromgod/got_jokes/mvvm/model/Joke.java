@@ -1,8 +1,15 @@
 package com.fromgod.got_jokes.mvvm.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+
+@Entity(tableName = "jokes_table")
 public class Joke {
 
+    @PrimaryKey(autoGenerate = true)
     private int id;
+
     private String category;
     private String type;
     private String joke;
@@ -10,17 +17,10 @@ public class Joke {
     private String delivery;
 
 
-    public Joke(int id, String category, String type, String joke) {
-        this.id = id;
+    public Joke(String category, String type, String joke, String setup, String delivery) {
         this.category = category;
         this.type = type;
         this.joke = joke;
-    }
-
-    public Joke(int id, String category, String type, String setup, String delivery) {
-        this.id = id;
-        this.category = category;
-        this.type = type;
         this.setup = setup;
         this.delivery = delivery;
     }
