@@ -31,17 +31,17 @@ class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.JokeHolder> {
     public void onBindViewHolder(@NonNull JokeHolder holder, int position) {
         Joke currentJoke = jokes.get(position);
 
-        //if(currentJoke.getType().equalsIgnoreCase("single")){
+        if(currentJoke.getType().equalsIgnoreCase("single")){
             holder.textCategory.setText(currentJoke.getCategory());
             holder.textBody.setText(currentJoke.getJoke());
-        /*}
+        }
         else if(currentJoke.getType().equalsIgnoreCase("twopart")){
             holder.textCategory.setText(currentJoke.getCategory());
             holder.textBody.setText(currentJoke.getSetup());
         }
         else {
             holder.textCategory.setText("Something went wrong");
-        }*/
+        }
 
     }       //end onBindViewHolder()
 

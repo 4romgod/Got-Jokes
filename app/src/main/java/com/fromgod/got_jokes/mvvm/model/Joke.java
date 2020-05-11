@@ -18,6 +18,16 @@ public class Joke {
     private Boolean error;
 
 
+    public Joke() {
+        this.category = "";
+        this.type = "";
+        this.joke = "";
+        this.setup = "";
+        this.delivery = "";
+        this.error = true;
+    }
+
+
     public Joke(String category, String type, String joke, String setup, String delivery, Boolean error) {
         this.category = category;
         this.type = type;
