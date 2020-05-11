@@ -5,11 +5,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities = {Joke.class}, exportSchema = false, version = 1)
 public abstract class JokeDB extends RoomDatabase {
@@ -33,38 +31,8 @@ public abstract class JokeDB extends RoomDatabase {
                 Room.databaseBuilder(context.getApplicationContext(),
                         JokeDB.class, "joke_database");
 
-        return builder.fallbackToDestructiveMigration().addCallback(roomcallback).build();
+        return builder.fallbackToDestructiveMigration().build();
     }
 
-
-    private static RoomDatabase.Callback roomcallback = new RoomDatabase.Callback(){
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-            Log.d(TAG, "onCreate: calling populate...");
-            new PopulateDbAsyncTask(INSTANCE).execute();
-        }
-
-    };
-
-    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void>{
-        private static final String TAG = "Populate";
-        
-        private JokeDAO jokeDAO;
-
-        private PopulateDbAsyncTask(JokeDB db){
-            jokeDAO = db.jokeDAO();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            Log.d(TAG, "doInBackground: Populating database");
-            jokeDAO.insert(new Joke("Programming", "single", "some funny things that i feel like sharing with the world", "", ""));
-            jokeDAO.insert(new Joke("Dark","twopart",  "some funny things that i feel like sharing with the world", "", ""));
-            jokeDAO.insert(new Joke("Miscellaneous","single",  "some funny things that i feel like sharing with the world", "", ""));
-
-            return null;
-        }
-    }
 
 }

@@ -15,14 +15,16 @@ public class Joke {
     private String joke;
     private String setup;
     private String delivery;
+    private Boolean error;
 
 
-    public Joke(String category, String type, String joke, String setup, String delivery) {
+    public Joke(String category, String type, String joke, String setup, String delivery, Boolean error) {
         this.category = category;
         this.type = type;
         this.joke = joke;
         this.setup = setup;
         this.delivery = delivery;
+        this.error = error;
     }
 
 
@@ -72,6 +74,14 @@ public class Joke {
 
     public void setDelivery(String delivery) {
         this.delivery = delivery;
+    }
+
+    public Boolean getError() {
+        return error;
+    }
+
+    public void setError(Boolean error) {
+        this.error = error;
     }
 
     @Override

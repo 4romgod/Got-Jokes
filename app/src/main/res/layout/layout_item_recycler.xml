@@ -20,8 +20,7 @@
             android:textColor="@color/black"
             android:maxLines="1"
             android:ellipsize="end"
-            android:layout_alignParentLeft="true"
-            />
+            android:layout_alignParentLeft="true"/>
 
         <TextView
             android:id="@+id/text_body"
