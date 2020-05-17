@@ -33,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Log.d(TAG, "run: method to run the thread");
                 try {
-                    sleep(5);   //time allocated to the splash
+                    sleep(4000);   //time allocated to the splash
                 }
                 catch (Exception ex){
                     ex.printStackTrace();
