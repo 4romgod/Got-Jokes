@@ -1,29 +1,17 @@
 package com.fromgod.got_jokes.mvvm.view.fragment;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.fromgod.got_jokes.Network.IGetDataService;
-import com.fromgod.got_jokes.Network.RetrofitClientInstance;
 import com.fromgod.got_jokes.R;
 import com.fromgod.got_jokes.mvvm.model.Joke;
-import com.fromgod.got_jokes.mvvm.viewmodel.JokeViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class FragSavedJoke extends Fragment {

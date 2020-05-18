@@ -15,7 +15,6 @@ import com.fromgod.got_jokes.mvvm.view.fragment.FragHome;
 import com.fromgod.got_jokes.mvvm.view.fragment.FragProfile;
 import com.fromgod.got_jokes.mvvm.view.fragment.FragSaved;
 import com.fromgod.got_jokes.R;
-import com.fromgod.got_jokes.utils.UI;
 
 import java.util.Stack;
 
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         fm.beginTransaction().add(R.id.layout_frame_main, fragSaved, "saved").hide(fragSaved).commit();
         fm.beginTransaction().add(R.id.layout_frame_main, fragPost, "post").hide(fragPost).commit();
         fm.beginTransaction().add(R.id.layout_frame_main, fragHome, "home").commit();
+        Log.d(TAG, "onCreate: "+fm.getBackStackEntryCount());
 
         enableNavBottom();
     }       //end onCreate()
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }       //end switch()
 
+                Log.d(TAG, "onNavigationItemSelected: "+fm.getBackStackEntryCount());
                 return true;
             }
         });
@@ -100,18 +101,12 @@ public class MainActivity extends AppCompatActivity {
 
    @Override
     public void onBackPressed() {
-        if (stack.size() == 1) {
-            finish();
-        }
-        /*else {
-            stack.pop();
-            int index = (int) stack.peek();
-            viewBottomNav.getMenu().getItem(index).setChecked(true);
-        }*/
+       Log.d(TAG, "onBackPressed: " +fm.getBackStackEntryCount());
+       if(fm.getBackStackEntryCount()==1){
+           finish();
+       }
 
-        Log.d(TAG, "onBackPressed: size: "+stack.size());
         super.onBackPressed();
     }
-
 
 }       //end class
