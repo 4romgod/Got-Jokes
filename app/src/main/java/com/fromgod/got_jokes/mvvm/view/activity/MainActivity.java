@@ -2,6 +2,7 @@ package com.fromgod.got_jokes.mvvm.view.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
@@ -24,19 +25,25 @@ public class MainActivity extends AppCompatActivity {
     //VIEWS
     BottomNavigationView viewBottomNav;
 
-    FragmentManager fragmentManager = this.getSupportFragmentManager();
+    final Fragment fragHome = new FragHome();
+    final Fragment fragPost = new FragProfile();
+    final Fragment fragSaved = new FragSaved();
+    Fragment fragActive = fragHome;
 
-    Stack stack = new Stack();
+    FragmentManager fm = this.getSupportFragmentManager();
+
+    Stack<String> stack = new Stack();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initViews();
-        UI.replaceFragment(fragmentManager, new FragHome(), R.id.layout_frame_main);
-        stack.push(0);
+
+        fm.beginTransaction().add(R.id.layout_frame_main, fragSaved, "saved").hide(fragSaved).commit();
+        fm.beginTransaction().add(R.id.layout_frame_main, fragPost, "post").hide(fragPost).commit();
+        fm.beginTransaction().add(R.id.layout_frame_main, fragHome, "home").commit();
 
         enableNavBottom();
     }       //end onCreate()
@@ -55,21 +62,27 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
 
                     case R.id.home: {
-                        stack.push(0);
+                        stack.push("home");
                         Toast.makeText(MainActivity.this, "Jokes", Toast.LENGTH_SHORT).show();
-                        UI.replaceFragment(fragmentManager, new FragHome(), R.id.layout_frame_main);
+
+                        fm.beginTransaction().hide(fragActive).show(fragHome).commit();
+                        fragActive = fragHome;
                         break;
                     }
                     case R.id.post: {
-                        stack.push(1);
+                        stack.push("post");
                         Toast.makeText(MainActivity.this, "Post", Toast.LENGTH_SHORT).show();
-                        UI.replaceFragment(fragmentManager, new FragProfile(), R.id.layout_frame_main);
+
+                        fm.beginTransaction().hide(fragActive).show(fragPost).commit();
+                        fragActive = fragPost;
                         break;
                     }
                     case R.id.saved: {
-                        stack.push(2);
+                        stack.push("saved");
                         Toast.makeText(MainActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-                        UI.replaceFragment(fragmentManager, new FragSaved(), R.id.layout_frame_main);
+
+                        fm.beginTransaction().hide(fragActive).show(fragSaved).commit();
+                        fragActive = fragSaved;
                         break;
                     }
                     default: {
