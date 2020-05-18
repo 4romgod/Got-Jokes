@@ -23,6 +23,14 @@ public class JokeRepository {
         return mAllJokes;
     }       //end getAllJokes()
 
+    public  LiveData<Joke> getJoke(int id){
+        return jokeDAO.getJoke(id);
+    }
+
+    public LiveData<Integer> getCount(int id){
+        return jokeDAO.getCount(id);
+    }
+
 
     public void insert(Joke joke){
         new InsertAsyncTask(jokeDAO).execute(joke);

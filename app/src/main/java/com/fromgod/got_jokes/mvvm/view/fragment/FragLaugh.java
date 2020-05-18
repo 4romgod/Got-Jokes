@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.fromgod.got_jokes.mvvm.viewmodel.JokeViewModel;
@@ -156,15 +157,48 @@ public class FragLaugh extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+        // clicked the save button
         if(v.getId() == R.id.fab_save){
-            Toast.makeText(getActivity(), "Saving...", Toast.LENGTH_SHORT).show();
-            viewModel.insert(joke);
+            progressDialog.show();
+
+            if( joke!=null ){
+                saveJoke(joke);
+            }       //end if{}
+            progressDialog.dismiss();
+
         }
+
+        // clicked the next button
         else if(v.getId() == R.id.fab_next){
             getJoke();
         }
 
     }       //end onClick()
+
+    public void saveJoke(final Joke joke){
+        viewModel.getCount(joke.getId()).observe(getActivity(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+
+                // 1. check if joke is already in the database
+                if(integer <= 0){
+                    Log.d(TAG, "onClick: Joke is unique... count: " + integer);
+
+                    // 2.1 if not, then insert
+                    viewModel.insert(joke);
+                    Toast.makeText(getActivity(), "Saving...", Toast.LENGTH_SHORT).show();
+                }else{
+
+                    // 2.2 else, do not insert
+                    Log.d(TAG, "onChanged: Joke is not unique... count: "+integer);
+                    Toast.makeText(getActivity(), "Already saved...", Toast.LENGTH_SHORT).show();
+                }
+
+            }       //end onChanged()
+
+        });
+    }
 
 
 }       //end class

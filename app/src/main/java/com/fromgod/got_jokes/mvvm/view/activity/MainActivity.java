@@ -85,16 +85,16 @@ public class MainActivity extends AppCompatActivity {
     }       //end enableNavBottom()
 
 
-    @Override
+   @Override
     public void onBackPressed() {
         if (stack.size() == 1) {
             finish();
         }
-        else {
+        /*else {
             stack.pop();
             int index = (int) stack.peek();
             viewBottomNav.getMenu().getItem(index).setChecked(true);
-        }
+        }*/
 
         Log.d(TAG, "onBackPressed: size: "+stack.size());
         super.onBackPressed();

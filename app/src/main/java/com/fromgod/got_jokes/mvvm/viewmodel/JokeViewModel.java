@@ -28,6 +28,14 @@ public class JokeViewModel extends AndroidViewModel {
         return jokes;
     }       //end getAllJokes()
 
+    public LiveData<Joke> getJoke(int id){
+        return repository.getJoke(id);
+    }
+
+    public LiveData<Integer> getCount(int id){
+        return repository.getCount(id);
+    }
+
 
     public void insert(Joke joke){
         repository.insert(joke);

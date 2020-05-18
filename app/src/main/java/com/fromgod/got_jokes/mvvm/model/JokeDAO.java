@@ -19,6 +19,9 @@ public interface JokeDAO {
     @Query("SELECT * FROM jokes_table")
     LiveData<List<Joke>> getAllJokes();
 
+    @Query("SELECT * FROM jokes_table WHERE id= :id")
+    LiveData<Joke> getJoke(int id);
+
     @Update
     void update(Joke joke);
 
@@ -28,6 +31,7 @@ public interface JokeDAO {
     @Query("Delete from jokes_table")
     void deleteAllJokes();
 
-
+    @Query("SELECT COUNT() FROM jokes_table WHERE id = :id")
+    LiveData<Integer> getCount(int id);
 
 }       //end class
