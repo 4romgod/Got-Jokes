@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/layout_app_bar_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:elevation="5dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/layout_toolbar_post"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:elevation="4dp">
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <!--        holds the form-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/layout_app_bar_post"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:padding="20dp">
+
+            <RelativeLayout
+                android:id="@+id/containerCat"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/lblCat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Category: "
+                    android:textColor="@color/black"
+                    android:textSize="23dp" />
+
+                <Spinner
+                    android:id="@+id/spinCat"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="29dp"
+                    android:layout_toRightOf="@+id/lblCat"
+                    android:background="@color/gray" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/containerType"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/containerCat">
+
+                <TextView
+                    android:id="@+id/lblType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Type: "
+                    android:textColor="@color/black"
+                    android:textSize="23dp" />
+
+                <Spinner
+                    android:id="@+id/spinType"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="72dp"
+                    android:layout_toRightOf="@+id/lblType"
+                    android:background="@color/gray" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/containerJoke"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/containerType">
+
+                <TextView
+                    android:id="@+id/lblJoke"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Joke: "
+                    android:textColor="@color/black"
+                    android:textSize="23dp" />
+
+                <EditText
+                    android:id="@+id/jokeSetup"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:hint="Setup"
+                    android:paddingLeft="15dp"
+                    android:background="@drawable/style_edit_text"
+                    android:layout_marginLeft="72dp"
+                    android:layout_toRightOf="@+id/lblJoke"/>
+
+                <EditText
+                    android:id="@+id/jokeDelivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:hint="Delivery..."
+                    android:paddingLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="72dp"
+                    android:background="@drawable/style_edit_text"
+                    android:layout_below="@+id/jokeSetup"
+                    android:layout_toRightOf="@+id/lblJoke"/>
+
+                <Button
+                    android:id="@+id/submitBtn"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/jokeDelivery"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimary"
+                    android:text="SUBMIT"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
