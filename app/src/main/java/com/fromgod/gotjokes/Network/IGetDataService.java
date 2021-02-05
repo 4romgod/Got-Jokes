@@ -10,16 +10,6 @@ import retrofit2.http.Query;
 public interface IGetDataService {
 
     @GET("{category}")
-    Call<Joke> getJoke(
-            @Path("category") String category,
-            @Query("contains") String contain
-    );
+    Call<Joke> getJoke(@Path("category") String category, @Query("contains") String contain);
 
-    /*@GET("{category}?type=single")
-    Call<Joke1P> getJoke1P(
-            @Path("category") String category,
-            @Query("contains") String contain
-    );*/
-
-
-}       //end interface
+}
