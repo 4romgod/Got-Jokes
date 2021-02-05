@@ -8,108 +8,97 @@ import java.util.List;
 
 public class JokeRepository {
 
-    private JokeDAO jokeDAO;
-    private LiveData<List<Joke>> mAllJokes;
+    private JokeDAO jokeDao;
+    private LiveData<List<Joke>> jokeListLiveData;
 
-
-    public JokeRepository(Application application){
-        JokeDB db = JokeDB.getINSTANCE(application);
-        jokeDAO = db.jokeDAO();
-        mAllJokes = jokeDAO.getAllJokes();
-    }       //end constructor()
+    public JokeRepository(Application application) {
+        JokeDB jokeDB = JokeDB.getInstance(application);
+        jokeDao = jokeDB.jokeDAO();
+        jokeListLiveData = jokeDao.getAllJokes();
+    }
 
     public LiveData<List<Joke>> getAllJokes(){
-        return mAllJokes;
-    }       //end getAllJokes()
+        return jokeListLiveData;
+    }
 
     public  LiveData<Joke> getJoke(int id){
-        return jokeDAO.getJoke(id);
+        return jokeDao.getJoke(id);
     }
 
     public LiveData<Integer> getCount(int id){
-        return jokeDAO.getCount(id);
+        return jokeDao.getCount(id);
     }
 
     public void insert(Joke joke){
-        new InsertAsyncTask(jokeDAO).execute(joke);
-    }       //end insert()
-
+        new InsertAsyncTask(jokeDao).execute(joke);
+    }
 
     public void update(Joke joke){
-        new UpdateAsyncTask(jokeDAO).execute(joke);
-    }       //end update()
-
+        new UpdateAsyncTask(jokeDao).execute(joke);
+    }
 
     public void delete(Joke joke){
-        new DeleteAsyncTask(jokeDAO).execute(joke);
-    }       //end delete()
-
+        new DeleteAsyncTask(jokeDao).execute(joke);
+    }
 
     public void deleteAllItems(){
-        new DeleteAllAsyncTask(jokeDAO).execute();
-    }       //end deleteAllItems()
+        new DeleteAllAsyncTask(jokeDao).execute();
+    }
 
-
-
-    //------------------------------------------------------ASYNC OPERATIONS----------------------------
     private static class InsertAsyncTask extends AsyncTask<Joke, Void, Void> {
-        private JokeDAO mAsyncTaskDao;
+        private JokeDAO jokeDao;
 
-        public InsertAsyncTask(JokeDAO mAsyncTaskDao) {
-            this.mAsyncTaskDao = mAsyncTaskDao;
-        }       //end constructor()
+        public InsertAsyncTask(JokeDAO jokeDao) {
+            this.jokeDao = jokeDao;
+        }
 
         @Override
         protected Void doInBackground(final Joke... params) {
-            mAsyncTaskDao.insert(params[0]);
+            jokeDao.insert(params[0]);
             return null;
         }
-    }       //end innerClass
+    }
 
+    private static class UpdateAsyncTask extends AsyncTask<Joke, Void, Void> {
+        private JokeDAO jokeDao;
 
-    private static class UpdateAsyncTask extends AsyncTask<Joke, Void, Void>{
-        private JokeDAO mAsyncTaskDao;
-
-        public UpdateAsyncTask(JokeDAO mAsyncTaskDao) {
-            this.mAsyncTaskDao = mAsyncTaskDao;
-        }       //end constructor()
+        public UpdateAsyncTask(JokeDAO jokeDao) {
+            this.jokeDao = jokeDao;
+        }
 
         @Override
         protected Void doInBackground(final Joke... params) {
-            mAsyncTaskDao.update(params[0]);
+            jokeDao.update(params[0]);
             return null;
         }
-    }       //end innerClass
-
+    }
 
     private static class DeleteAsyncTask extends AsyncTask<Joke, Void, Void>{
-        private JokeDAO mAsyncTaskDao;
+        private JokeDAO jokeDao;
 
-        public DeleteAsyncTask(JokeDAO mAsyncTaskDao) {
-            this.mAsyncTaskDao = mAsyncTaskDao;
-        }       //end constructor()
+        public DeleteAsyncTask(JokeDAO jokeDao) {
+            this.jokeDao = jokeDao;
+        }
 
         @Override
         protected Void doInBackground(final Joke... params) {
-            mAsyncTaskDao.delete(params[0]);
+            jokeDao.delete(params[0]);
             return null;
         }
-    }       //end innerClass
-
+    }
 
     private static class DeleteAllAsyncTask extends AsyncTask<Void, Void, Void>{
-        private JokeDAO mAsyncTaskDao;
+        private JokeDAO jokeDao;
 
-        public DeleteAllAsyncTask(JokeDAO mAsyncTaskDao) {
-            this.mAsyncTaskDao = mAsyncTaskDao;
-        }       //end constructor()
+        public DeleteAllAsyncTask(JokeDAO jokeDao) {
+            this.jokeDao = jokeDao;
+        }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            mAsyncTaskDao.deleteAllJokes();
+            jokeDao.deleteAllJokes();
             return null;
         }
-    }       //end innerClass
-
+    }
 
 }

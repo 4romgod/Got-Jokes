@@ -1,6 +1,5 @@
 package com.fromgod.gotjokes.mvvm.model;
 
-
 import android.content.Context;
 
 import androidx.room.Database;
@@ -11,23 +10,19 @@ import androidx.room.RoomDatabase;
 public abstract class JokeDB extends RoomDatabase {
     private static final String TAG = "Database";
 
-    private static JokeDB INSTANCE;
+    private static JokeDB instance;
     public abstract JokeDAO jokeDAO();
 
-    public static synchronized JokeDB getINSTANCE(Context context){
-        if(INSTANCE == null){
-            INSTANCE = create(context);
+    public static synchronized JokeDB getInstance(Context context) {
+        if(instance == null) {
+            instance = createJokeDB(context);
         }
-        return INSTANCE;
+        return instance;
     }
 
-    private static JokeDB create(Context context){
-        RoomDatabase.Builder<JokeDB> builder =
-                Room.databaseBuilder(context.getApplicationContext(),
-                        JokeDB.class, "joke_database");
-
+    private static JokeDB createJokeDB(Context context) {
+        RoomDatabase.Builder<JokeDB> builder = Room.databaseBuilder(context.getApplicationContext(), JokeDB.class, "joke_database");
         return builder.fallbackToDestructiveMigration().build();
     }
-
 
 }
