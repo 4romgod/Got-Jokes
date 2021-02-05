@@ -21,8 +21,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.fromgod.gotjokes.Network.IGetDataService;
-import com.fromgod.gotjokes.Network.RetrofitClientInstance;
+import com.fromgod.gotjokes.network.IGetDataService;
+import com.fromgod.gotjokes.network.RetrofitClientInstance;
 import com.fromgod.gotjokes.mvvm.model.Joke;
 import com.fromgod.gotjokes.mvvm.view.activity.MainActivity;
 import com.fromgod.gotjokes.mvvm.viewmodel.JokeViewModel;
@@ -51,7 +51,6 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
     JokeViewModel viewModel;
 
     IGetDataService serviceGetData;
-
     String jokeCategory = "";
     String searchKeyword = "";
     Joke joke = null;
@@ -78,16 +77,14 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
         return layoutMain;
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
 
         if (MainActivity.fragActive == MainActivity.fragHome) {
-            getJoke();
+            getJokeThenDisplayJoke();
         }
     }
-
 
     public void initViews() {
         progressDialog = new ProgressDialog(getContext());
@@ -125,9 +122,9 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
         mToggle.syncState();        //synchronize the indicator with state of linked DrawerLayout
 
         navView.setNavigationItemSelectedListener(this);
-    }       //end setupToolbar()
+    }
 
-    public void getJoke() {
+    public void getJokeThenDisplayJoke() {
         Call<Joke> call = serviceGetData.getJoke(jokeCategory, searchKeyword);
         progressDialog.show();
 
@@ -155,7 +152,6 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
             }
         });
     }
-
 
     public void displayJoke(Joke joke) {
         textCategory.setText("");
@@ -190,7 +186,7 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
             progressDialog.dismiss();
         }
         else if (v.getId() == R.id.fab_next) {
-            getJoke();
+            getJokeThenDisplayJoke();
         }
     }
 
@@ -239,7 +235,7 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
                 break;
         }
 
-        getJoke();
+        getJokeThenDisplayJoke();
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
 

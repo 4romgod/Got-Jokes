@@ -1,4 +1,4 @@
-package com.fromgod.gotjokes.Network;
+package com.fromgod.gotjokes.network;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

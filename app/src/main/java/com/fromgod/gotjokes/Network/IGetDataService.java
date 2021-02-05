@@ -1,4 +1,4 @@
-package com.fromgod.gotjokes.Network;
+package com.fromgod.gotjokes.network;
 
 import com.fromgod.gotjokes.mvvm.model.Joke;
 

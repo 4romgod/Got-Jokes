@@ -16,23 +16,19 @@ import androidx.fragment.app.FragmentManager;
 import com.fromgod.gotjokes.R;
 import com.fromgod.gotjokes.mvvm.model.Joke;
 
-
 public class FragSavedJoke extends Fragment {
     private static final String TAG = "FragLaugh";
 
-    //VIEWS
     View layoutMain;
     TextView textCategory, textSetup, textDelivery;
     Toolbar toolbar;
 
     Joke joke;
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }       //end onCreate()
-
+    }
 
     @Nullable
     @Override
@@ -46,17 +42,13 @@ public class FragSavedJoke extends Fragment {
         initViews();
 
         return layoutMain;
-    }       //end onCreateView()
-
+    }
 
     @Override
     public void onStart() {
         super.onStart();
-
-        display(joke);
-
-    }       //end onStart()
-
+        displayJoke(joke);
+    }
 
     public void initViews() {
         setHasOptionsMenu(true);
@@ -76,13 +68,9 @@ public class FragSavedJoke extends Fragment {
         textCategory =  layoutMain.findViewById(R.id.text_category);
         textSetup =  layoutMain.findViewById(R.id.text_setup);
         textDelivery =  layoutMain.findViewById(R.id.text_delivery);
+    }
 
-    }       //end initViews()
-
-
-
-    public void display(Joke joke){
-
+    public void displayJoke(Joke joke) {
         if (joke.getError() == true) {
             textCategory.setText("No matching joke found...");
             textSetup.setText("");
@@ -99,8 +87,6 @@ public class FragSavedJoke extends Fragment {
                 textDelivery.setText(joke.getDelivery());
             }
         }
+    }
 
-    }       //end display()
-
-
-}       //end class
+}

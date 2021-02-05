@@ -33,29 +33,23 @@ import com.fromgod.gotjokes.mvvm.viewmodel.JokeViewModel;
 
 import java.util.List;
 
-
 public class FragSaved extends Fragment {
     private static final String TAG = "FragSaved";
 
-    //VIEWS
     View layoutMain;
     Toolbar toolbar;
     ActionBar actionBar;
     RecyclerView recyclerView;
 
     private JokeViewModel viewModel;
-
     AdapterRecycler adapter;
-
     FragmentManager fm;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-    }       //end onCreate()
-
+    }
 
     @Nullable
     @Override
@@ -70,7 +64,6 @@ public class FragSaved extends Fragment {
         adapter = new AdapterRecycler();
         recyclerView.setAdapter(adapter);
 
-        //progressDialog.show();
         viewModel = ViewModelProviders.of(getActivity()).get(JokeViewModel.class);
         viewModel.getAllJokes().observe(getActivity(), new Observer<List<Joke>>() {
             @Override
@@ -111,8 +104,7 @@ public class FragSaved extends Fragment {
         });
 
         return layoutMain;
-    }       //end onCreateView()
-
+    }
 
     public void initViews(){
         toolbar = layoutMain.findViewById(R.id.layout_toolbar_saved);
@@ -124,9 +116,7 @@ public class FragSaved extends Fragment {
         recyclerView = layoutMain.findViewById(R.id.layout_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-
-    }       //end initViews()
-
+    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -134,12 +124,10 @@ public class FragSaved extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -166,8 +154,7 @@ public class FragSaved extends Fragment {
         return true;
     }
 
-
-    public final Fragment newFragJoke(Joke joke){
+    public final Fragment newFragJoke(Joke joke) {
         Fragment fragment = new FragSavedJoke();
         Bundle bundle = new Bundle();
         bundle.putSerializable("A_JOKE", joke);
@@ -176,4 +163,4 @@ public class FragSaved extends Fragment {
         return fragment;
     }
 
-}       //end class
+}

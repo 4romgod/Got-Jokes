@@ -15,10 +15,8 @@ import androidx.fragment.app.Fragment;
 
 import com.fromgod.gotjokes.R;
 
-
 public class FragPost extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    //VIEWS
     View layoutMain;
     Toolbar toolbar;
     Spinner spinCat;
@@ -30,8 +28,7 @@ public class FragPost extends Fragment implements AdapterView.OnItemSelectedList
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }       //end onCreate()
-
+    }
 
     @Nullable
     @Override
@@ -49,7 +46,6 @@ public class FragPost extends Fragment implements AdapterView.OnItemSelectedList
         types[0] = getString(R.string.single);
         types[1] = getString(R.string.twopart);
 
-        // Now, Create a Array Adapter
         ArrayAdapter adapterCat = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, categories);
         ArrayAdapter adapterType = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, types);
         adapterCat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -57,10 +53,8 @@ public class FragPost extends Fragment implements AdapterView.OnItemSelectedList
         spinCat.setAdapter(adapterCat);
         spinType.setAdapter(adapterType);
 
-
         return layoutMain;
-    }       //end onCreateView()
-
+    }
 
     public void initViews(){
         toolbar = layoutMain.findViewById(R.id.layout_toolbar_post);
@@ -70,17 +64,12 @@ public class FragPost extends Fragment implements AdapterView.OnItemSelectedList
         spinType = layoutMain.findViewById(R.id.spinType);
         spinCat.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
         spinType.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
-
-    }
-
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {}
 
-    }
-}       //end class
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {}
+
+}
