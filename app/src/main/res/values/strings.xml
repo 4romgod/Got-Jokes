@@ -7,13 +7,14 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!--    types of jokes-->
+    <!-- types of jokes -->
     <string name="single">single</string>
     <string name="twopart">twopart</string>
 
-    <!--    categories of jokes-->
+    <!-- categories of jokes -->
     <string name="any">Any</string>
     <string name="programing">Programming</string>
     <string name="dark">Dark</string>
     <string name="miscellaneous">Miscellaneous</string>
+
 </resources>

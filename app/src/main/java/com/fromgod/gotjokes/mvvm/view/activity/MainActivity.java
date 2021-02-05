@@ -22,19 +22,15 @@ import java.util.Stack;
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
 
-    //VIEWS
-    BottomNavigationView viewBottomNav;
+    public BottomNavigationView viewBottomNav;
 
+    public FragmentManager fm = this.getSupportFragmentManager();
     public static final Fragment fragHome = new FragHome();
     public static final Fragment fragAbout = new FragAbout();
     public static final Fragment fragSaved = new FragSaved();
-
     public static Fragment fragActive = fragHome;
 
-    FragmentManager fm = this.getSupportFragmentManager();
-
     Stack<String> stack = new Stack();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         initViews();
 
         enableNavBottom();
-    }       //end onCreate()
+    }
 
     @Override
     protected void onStart() {
@@ -60,28 +56,26 @@ public class MainActivity extends AppCompatActivity {
 
         fm.beginTransaction().show(fragActive).commit();
 
-        int selectedID = 0;
+        int selectedId = 0;
         if(fragActive instanceof FragHome){
             Log.d(TAG, "onResume: Home Fragment");
-            selectedID = R.id.home;
+            selectedId = R.id.home;
         }
         else if(fragActive instanceof FragSaved){
             Log.d(TAG, "onResume: Saved Fragment");
-            selectedID = R.id.saved;
+            selectedId = R.id.saved;
         }
         else if(fragActive instanceof FragAbout){
             Log.d(TAG, "onResume: About Fragment");
-            selectedID = R.id.about;
+            selectedId = R.id.about;
         }
-        viewBottomNav.setSelectedItemId(selectedID);
-        
-    }
 
+        viewBottomNav.setSelectedItemId(selectedId);
+    }
 
     public void initViews() {
         viewBottomNav = (BottomNavigationView) findViewById(R.id.view_nav_bottom);
-    }       //end initViews()
-
+    }
 
     public void enableNavBottom() {
         viewBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -89,24 +83,20 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 switch (menuItem.getItemId()) {
-
                     case R.id.home: {
                         stack.push("home");
-
                         fm.beginTransaction().hide(fragActive).show(fragHome).commit();
                         fragActive = fragHome;
                         break;
                     }
                     case R.id.saved: {
                         stack.push("saved");
-
                         fm.beginTransaction().hide(fragActive).show(fragSaved).commit();
                         fragActive = fragSaved;
                         break;
                     }
                     case R.id.about: {
                         stack.push("About");
-
                         fm.beginTransaction().hide(fragActive).show(fragAbout).commit();
                         fragActive = fragAbout;
                         break;
@@ -114,23 +104,23 @@ public class MainActivity extends AppCompatActivity {
                     default: {
                         Toast.makeText(MainActivity.this, "Invalid Item", Toast.LENGTH_SHORT).show();
                     }
+                }
 
-                }       //end switch()
-
-                removeFragJoke();
+                if(fragActive instanceof FragSavedJoke) {
+                    fm.beginTransaction().remove(fragActive).commit();
+                }
 
                 return true;
             }
         });
-
-    }       //end enableNavBottom()
+    }
 
     @Override
     public void onBackPressed() {
-        if( (fragActive==fragHome) || (fragActive== fragAbout) || (fragActive== fragSaved) ){
+        if(fragActive == fragHome || fragActive == fragAbout || fragActive == fragSaved) {
             finish();
         }
-        else if( (fragActive instanceof FragSavedJoke)){
+        else if(fragActive instanceof FragSavedJoke) {
             fm.beginTransaction().hide(MainActivity.fragActive).show(fragSaved).commit();
             fm.beginTransaction().remove(fragActive).commit();
             fragActive = fragSaved;
@@ -140,11 +130,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void removeFragJoke(){
-        if(fragActive instanceof FragSavedJoke) {
-            fm.beginTransaction().remove(fragActive).commit();
-        }
-    }
-
-
-}       //end class
+}

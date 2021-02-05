@@ -13,45 +13,41 @@ import java.util.List;
 
 public class JokeViewModel extends AndroidViewModel {
 
-    private JokeRepository repository;
-    private LiveData<List<Joke>> jokes;
-
+    private JokeRepository jokeRepository;
+    private LiveData<List<Joke>> jokeListLiveData;
 
     public JokeViewModel(@NonNull Application application) {
         super(application);
-        repository = new JokeRepository(application);
-        jokes = repository.getAllJokes();
-    }       //end constructor()
-
+        jokeRepository = new JokeRepository(application);
+        jokeListLiveData = jokeRepository.getAllJokes();
+    }
 
     public LiveData<List<Joke>> getAllJokes(){
-        return jokes;
-    }       //end getAllJokes()
+        return jokeListLiveData;
+    }
 
     public LiveData<Joke> getJoke(int id){
-        return repository.getJoke(id);
+        return jokeRepository.getJoke(id);
     }
 
     public LiveData<Integer> getCount(int id){
-        return repository.getCount(id);
+        return jokeRepository.getCount(id);
     }
 
-
     public void insert(Joke joke){
-        repository.insert(joke);
-    }       //end insert()
+        jokeRepository.insert(joke);
+    }
 
     public void update(Joke joke){
-        repository.update(joke);
+        jokeRepository.update(joke);
     }
 
     public void delete(Joke joke){
-        repository.delete(joke);
+        jokeRepository.delete(joke);
     }
 
     public void deleteAllItems(){
-        repository.deleteAllItems();
+        jokeRepository.deleteAllItems();
     }
-
 
 }

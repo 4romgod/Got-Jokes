@@ -12,13 +12,10 @@ import androidx.fragment.app.Fragment;
 
 import com.fromgod.gotjokes.R;
 
-
 public class FragAbout extends Fragment {
-    private static final String TAG="FragmentAbout";
+    private static final String TAG = "FragmentAbout";
 
-    //all Views
-    View layoutMain;        //the view for the main layout
-
+    public View layoutMain;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,10 +30,6 @@ public class FragAbout extends Fragment {
         Log.d(TAG, "onCreateView: fragment about instantiated user interface view");
 
         return layoutMain;
-    }       //close the onCreateView
+    }
 
-
-
-
-
-}       //end class
+}

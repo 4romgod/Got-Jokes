@@ -37,7 +37,6 @@ import retrofit2.Response;
 public class FragHome extends Fragment implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final String TAG = "FragJokes";
 
-    //VIEWS
     View layoutMain;
     Toolbar toolbar;
     ProgressDialog progressDialog;
@@ -51,20 +50,17 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
 
     JokeViewModel viewModel;
 
-    IGetDataService service;
+    IGetDataService serviceGetData;
 
-    // PATH AND QUERY STRINGS
-    String catJoke = "";
-    String keyWord = "";
-
-    Joke joke;
-
+    String jokeCategory = "";
+    String searchKeyword = "";
+    Joke joke = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);        // enables toggle btn, and options menu
-    }       //end onCreate()
+    }
 
     @Nullable
     @Override
@@ -73,15 +69,14 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
             layoutMain = inflater.inflate(R.layout.frag_home, null);
         }
         initViews();
-        setupToolbar();
 
-        catJoke = getString(R.string.any);
+        jokeCategory = getString(R.string.any);
 
         viewModel = ViewModelProviders.of(getActivity()).get(JokeViewModel.class);
-        service = RetrofitClientInstance.getRetrofitInstance().create(IGetDataService.class);
+        serviceGetData = RetrofitClientInstance.getRetrofitInstance().create(IGetDataService.class);
 
         return layoutMain;
-    }       //end onCreateView()
+    }
 
 
     @Override
@@ -91,8 +86,7 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
         if (MainActivity.fragActive == MainActivity.fragHome) {
             getJoke();
         }
-
-    }       //end onStart()
+    }
 
 
     public void initViews() {
@@ -110,8 +104,8 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
         fabSave = layoutMain.findViewById(R.id.fab_save);
         fabSave.setOnClickListener(this);
 
-    }   //end initView()
-
+        setupToolbar();
+    }
 
     public void setupToolbar() {
         toolbar = layoutMain.findViewById(R.id.layout_toolbar);
@@ -133,9 +127,8 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
         navView.setNavigationItemSelectedListener(this);
     }       //end setupToolbar()
 
-
     public void getJoke() {
-        Call<Joke> call = service.getJoke(catJoke, keyWord);
+        Call<Joke> call = serviceGetData.getJoke(jokeCategory, searchKeyword);
         progressDialog.show();
 
         Log.d(TAG, "getJoke: about to get a joke...");
@@ -145,13 +138,11 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
                 progressDialog.dismiss();
 
                 joke = response.body();
-
                 if (joke != null) {
                     Log.d(TAG, "onResponse: Joke: " + joke.toString());
-                    display(joke);
+                    displayJoke(joke);
                 }
-
-            }   //end onRequest()
+            }
 
             @Override
             public void onFailure(Call<Joke> call, Throwable t) {
@@ -160,15 +151,13 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
                 textCategory.setText("Something went wrong... Press Next to Refresh");
                 textSetup.setText("");
                 textDelivery.setText("");
-
                 Log.d(TAG, "onFailure: Couldn't get the joke");
             }
         });
+    }
 
-    }           //end getJoke()
 
-
-    public void display(Joke joke) {
+    public void displayJoke(Joke joke) {
         textCategory.setText("");
         textSetup.setText("");
         textDelivery.setText("");
@@ -177,40 +166,33 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
             textCategory.setText("No matching joke found...");
             textSetup.setText("");
             textDelivery.setText("");
-        } else {
+        }
+        else {
             if (joke.getType().equalsIgnoreCase(getString(R.string.single))) {
                 textCategory.setText(joke.getCategory());
                 textSetup.setText(joke.getJoke());
-            } else if (joke.getType().equalsIgnoreCase(getString(R.string.twopart))) {
+            }
+            else if (joke.getType().equalsIgnoreCase(getString(R.string.twopart))) {
                 textCategory.setText(joke.getCategory());
                 textSetup.setText(joke.getSetup());
                 textDelivery.setText(joke.getDelivery());
             }
         }
-
-    }       //end display()
-
+    }
 
     @Override
     public void onClick(View v) {
-        // clicked the save button
         if (v.getId() == R.id.fab_save) {
             progressDialog.show();
-
             if (joke != null) {
                 saveJoke(joke);
             }
-
             progressDialog.dismiss();
         }
-
-        // clicked the next button
         else if (v.getId() == R.id.fab_next) {
             getJoke();
         }
-
-    }       //end onClick()
-
+    }
 
     public void saveJoke(final Joke joke) {
         viewModel.getCount(joke.getId()).observe(getActivity(), new Observer<Integer>() {
@@ -227,12 +209,9 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
                     // 2.2 else, do not insert
                     Log.d(TAG, "onChanged: Joke is not unique... count: " + integer);
                 }
-
-            }       //end onChanged()
-
+            }
         });
-    }           //end saveJoke()
-
+    }
 
     //makes the toggle menu icon clickable
     @Override
@@ -243,27 +222,22 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-
             case R.id.home:
-                catJoke = getString(R.string.any);
+                jokeCategory = getString(R.string.any);
                 break;
-
             case R.id.programming:
-                catJoke = getString(R.string.programing);
+                jokeCategory = getString(R.string.programing);
                 break;
-
             case R.id.dark:
-                catJoke = getString(R.string.dark);
+                jokeCategory = getString(R.string.dark);
                 break;
-
             case R.id.miscellaneous:
-                catJoke = getString(R.string.miscellaneous);
+                jokeCategory = getString(R.string.miscellaneous);
                 break;
-        }       //end switch{}
+        }
 
         getJoke();
 
@@ -272,29 +246,4 @@ public class FragHome extends Fragment implements NavigationView.OnNavigationIte
         return true;
     }
 
-/*@Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_search, menu);
-
-        MenuItem searchItem = menu.findItem(R.id.search);
-
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener((new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                keyWord = query;
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        }));
-
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-*/
-
-}       //end class
+}

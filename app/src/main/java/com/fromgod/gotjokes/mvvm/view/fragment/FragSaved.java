@@ -77,7 +77,7 @@ public class FragSaved extends Fragment {
             public void onChanged(List<Joke> jokes) {
                 Log.d(TAG, "onChanged: size: " + jokes.size());
                 //progressDialog.dismiss();
-                adapter.setJokes(jokes);
+                adapter.setJokeList(jokes);
             }
         });
 
